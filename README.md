@@ -18,4 +18,4 @@ AF: 01B0, BC: 0013, DE: 00D8, HL: 014D, SP: FFFE, PC: 0213, F: Z-HC | IME: 0 | T
 Sample output
 ![output](./imgs/Output.png)
 
-Intented for use debugging Blarrg's test ROMs.
+Intented for debugging Blarrg's test ROMs.
