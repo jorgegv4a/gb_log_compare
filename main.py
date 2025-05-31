@@ -6,6 +6,9 @@ from general import txt
 
 
 def main():
+    # if True will ignore cpu T cycle errors
+    ignore_clock = True
+
     # Path to the log under test
     testing_log = Path("mojo.log")
 
@@ -33,6 +36,9 @@ def main():
     for i, items in enumerate(zip(correct_lines[::2], test_lines[::2])):
         data = []
         for item in items:
+            if item is None:
+                print(txt(f"%gk No difference after {i} lines"))
+                exit()
             data.append(parse_cpu_status(item))
 
         msg = []
@@ -41,7 +47,7 @@ def main():
                 msg.append(txt(f"%g  {test_val}"))
             else:
                 msg.append(txt(f"%rku{test_val}"))
-                if j != 11:
+                if j != 11 or not ignore_clock:
                     stop = True
 
         line = f"AF: {msg[0]}, BC: {msg[1]}, DE: {msg[2]}, HL: {msg[3]}, SP: {msg[4]}, PC: {msg[5]}, F: {msg[6]}{msg[7]}{msg[8]}{msg[9]} | IME: {msg[10]} | T: {msg[11]}"
